@@ -1,190 +1,191 @@
 @font-face {
-    font-family: 'Stor';
-    src: url('https://zadirajack.github.io/fonts/Stor.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Stor';
+  src: url('https://zadirajack.github.io/fonts/Stor.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Stor', serif;
-    background-color: #000;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+  font-family: 'Stor', serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  line-height: 1.6;
 }
 
+/* Центрированный контейнер для контента */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.profile-photo {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-}
-
-.bio-content {
-    line-height: 1.6;
-    padding: 20px;
-    text-align: center; /* Центрируем текст */
-    box-sizing: border-box;
-}
-
+/* Стилизация меню */
 .menu-icon {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    z-index: 10;
-    transition: transform 0.3s;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s;
 }
 
 .menu-icon:hover {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.menu-icon:focus {
+  outline: 2px solid #fff;
 }
 
 .menu-icon-bar {
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    margin: 5px 0;
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 5px 0;
 }
 
 .menu-list {
-    display: none;
-    position: fixed;
-    top: 60px; /* Располагаем меню под иконкой */
-    right: 20px; /* Располагаем меню у правого края */
-    background-color: #333;
-    list-style-type: none;
-    padding: 10px;
-    border-radius: 8px;
-    z-index: 5;
-    width: 200px;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
-    transition: opacity 0.3s, transform 0.3s;
-    opacity: 0;
-    transform: translateY(-20px); /* Скрываем меню вверх */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #333;
+  list-style-type: none;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 900;
+  width: 200px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .menu-list.show-menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0); /* Показываем меню */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .menu-list li {
-    margin: 10px 0;
-    text-align: center;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .menu-list li a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    transition: transform 0.3s, background-color 0.3s;
-    font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 18px;
 }
 
-.menu-list li a i {
-    margin-right: 8px;
+.menu-list li a:hover,
+.menu-list li a:focus {
+  transform: scale(1.1);
+  background-color: #fff;
+  color: #000;
 }
 
-.menu-list li a:hover {
-    transform: scale(1.1);
-    background-color: #fff;
-    color: #000;
+/* Основное содержимое биографии */
+.bio-content {
+  text-align: center;
+  padding: 20px;
 }
 
+/* Стилизация фотографии профиля */
+.profile-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  margin-bottom: 20px;
+}
+
+/* Стилизация ссылок */
 .link {
-    color: #f0f0f0;
-    text-decoration: underline;
-    transition: color 0.3s;
+  color: #f0f0f0;
+  text-decoration: underline;
+  transition: color 0.3s;
 }
 
-.link:hover {
-    color: #ffd700;
+.link:hover,
+.link:focus {
+  color: #ffd700;
 }
 
-/* Стили для секции комментариев */
+/* Стили для комментариев (если потребуется) */
 #comments {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Центрирование по горизонтали */
-    margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .comment-section {
-    text-align: center; /* Центрирование текста внутри секции */
-    max-width: 800px;  /* Опционально: задайте максимальную ширину */
-    background-color: #333; /* Фоновый цвет для лучшей видимости */
-    padding: 20px;
-    border-radius: 8px;
-    box-sizing: border-box;
+  text-align: center;
+  max-width: 800px;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 #disqus_thread {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 iframe {
-    border: 2px solid #fff;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 800px;
-    height: 450px;
-    box-sizing: border-box;
-    display: block;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  display: block;
 }
 
+/* Стили для скроллбара */
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 10px;
+  background-color: #555;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #333;
+  background: #333;
 }
 
-/* Медиа-запросы для адаптивного дизайна */
+/* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
-    .profile-photo {
-        width: 200px;
-        height: 200px;
-    }
-
-    .menu-icon {
-        top: 10px;
-        right: 10px;
-    }
-
-    .menu-list {
-        width: 100%;
-        right: 0;
-    }
-
-    iframe {
-        height: 300px;
-    }
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+  }
+  .menu-icon {
+    top: 10px;
+    right: 10px;
+  }
+  .menu-list {
+    width: 90%;
+    right: 5%;
+  }
+  iframe {
+    height: 300px;
+  }
 }
