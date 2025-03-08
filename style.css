@@ -1,344 +1,191 @@
-/* Basic Reset and Variables */
-* {
+@font-face {
+  font-family: 'Stor';
+  src: url('https://zadirajack.github.io/fonts/Stor.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-:root {
-  --primary-color: #3498db;
-  --bg-color: #ffffff;
-  --bg-alt: #f0f0f0;
-  --text-color: #333333;
 }
 
-/* Global Styles */
-html {
-  scroll-behavior: smooth;
-}
 body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-family: 'Stor', serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
   line-height: 1.6;
-  color: var(--text-color);
-  background: var(--bg-color);
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 0.5em;
-}
-p {
-  margin-bottom: 1em;
-}
-
-/* Links */
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-a:hover, a:focus {
-  text-decoration: underline;
-}
-
-/* Layout Containers */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
+/* Центрированный контейнер для контента */
+.container {
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-}
-.logo a {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  text-decoration: none;
+  padding: 20px;
 }
 
-/* Navigation (Hamburger Menu) */
-.hamburger {
+/* Стилизация меню */
+.menu-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: var(--text-color);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-.hamburger:focus {
-  outline: 2px dashed var(--primary-color);
-  outline-offset: 3px;
-}
-/* Hamburger icon animation when active (turn into "X") */
-.hamburger.active span:nth-child(1) {
-  -webkit-transform: translateY(8px) rotate(45deg);
-          transform: translateY(8px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  -webkit-transform: translateY(-8px) rotate(-45deg);
-          transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Nav menu overlay (mobile) */
-#nav-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
   z-index: 1000;
-}
-#nav-menu ul {
-  list-style: none;
-  text-align: center;
-}
-#nav-menu ul li {
-  margin: 1.5rem 0;
-}
-#nav-menu ul li a {
-  color: #ffffff;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-#nav-menu ul li a:hover, #nav-menu ul li a:focus {
-  text-decoration: underline;
-}
-#nav-menu.open {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transition: transform 0.3s;
 }
 
-/* Main content sections */
-.section {
-  padding: 4rem 1.5rem;
+.menu-icon:hover {
+  transform: rotate(90deg);
 }
-.section:not(.hero) {
+
+.menu-icon:focus {
+  outline: 2px solid #fff;
+}
+
+.menu-icon-bar {
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 5px 0;
+}
+
+.menu-list {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background-color: #333;
+  list-style-type: none;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 900;
+  width: 200px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
   opacity: 0;
-  -webkit-transform: translateY(20px);
-          transform: translateY(20px);
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.hero {
-  background: var(--bg-alt);
+
+.menu-list.show-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-list li {
+  margin: 10px 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 6rem 1.5rem;
-}
-.hero h1 {
-  font-size: 2rem;
-}
-.hero p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin-bottom: 2rem;
-}
-.hero .btn {
-  font-size: 1rem;
 }
 
-/* About section */
-.about {
-  background: var(--bg-color);
-}
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: flex-start;
-}
-.about-content p {
-  flex: 1;
-}
-.about-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* Features section */
-.features {
-  background: var(--bg-alt);
-}
-.features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-.feature-item {
-  text-align: center;
-  padding: 2rem 1rem;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-}
-
-/* Contact section */
-.contact {
-  background: var(--bg-color);
-}
-.contact-form {
-  max-width: 600px;
-  margin: 1rem auto 0 auto;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-.form-group label {
-  margin-bottom: 0.5rem;
-}
-.form-group input,
-.form-group textarea {
-  padding: 0.5rem;
-  font: inherit;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--primary-color);
-  outline: none;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  background: var(--primary-color);
-  color: #ffffff;
+.menu-list li a {
+  color: #fff;
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-.btn:hover, .btn:focus {
-  background: #2577b5; /* slightly darker shade of primary */
-  outline: none;
+  display: block;
+  padding: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 18px;
 }
 
-/* Footer */
-footer {
-  background: var(--bg-alt);
+.menu-list li a:hover,
+.menu-list li a:focus {
+  transform: scale(1.1);
+  background-color: #fff;
+  color: #000;
 }
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
+
+/* Основное содержимое биографии */
+.bio-content {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-.footer-content p {
-  margin-bottom: 0.5rem;
-}
-.subscribe {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-.subscribe-form {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-.subscribe-form input[type=email] {
-  padding: 0.5rem;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  font: inherit;
-}
-.subscribe-form input[type=email]:focus {
-  border-color: var(--primary-color);
-  outline: none;
-}
-.subscribe-form .btn {
-  padding: 0.5rem 1rem;
+  padding: 20px;
 }
 
-/* Media Queries for responsiveness */
-@media (min-width: 768px) {
-  /* Show horizontal menu, hide hamburger */
-  .hamburger {
-    display: none;
+/* Стилизация фотографии профиля */
+.profile-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  margin-bottom: 20px;
+}
+
+/* Стилизация ссылок */
+.link {
+  color: #f0f0f0;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.link:hover,
+.link:focus {
+  color: #ffd700;
+}
+
+/* Стили для комментариев (если потребуется) */
+#comments {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.comment-section {
+  text-align: center;
+  max-width: 800px;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+#disqus_thread {
+  margin-top: 20px;
+}
+
+iframe {
+  border: 2px solid #fff;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  display: block;
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+  .profile-photo {
+    width: 200px;
+    height: 200px;
   }
-  #nav-menu {
-    position: static;
-    height: auto;
-    background: none;
-    -webkit-transform: none !important;
-            transform: none !important;
-    -webkit-transition: none;
-    transition: none;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    z-index: auto;
+  .menu-icon {
+    top: 10px;
+    right: 10px;
   }
-  #nav-menu ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
+  .menu-list {
+    width: 90%;
+    right: 5%;
   }
-  #nav-menu ul li {
-    margin: 0;
-  }
-  #nav-menu ul li a {
-    color: var(--text-color);
-    font-size: 1rem;
-  }
-  /* About section: side by side layout */
-  .about-content {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  /* Features section: multiple columns */
-  .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  /* Footer layout: horizontal alignment */
-  .footer-content {
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: left;
-    align-items: center;
-  }
-  .subscribe {
-    flex-direction: row;
-    align-items: center;
+  iframe {
+    height: 300px;
   }
 }
