@@ -39,7 +39,8 @@ body {
   border: none;
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .menu-icon:hover {
@@ -58,6 +59,7 @@ body {
   margin: 5px 0;
 }
 
+/* Меню */
 .menu-list {
   position: fixed;
   top: 60px;
@@ -73,6 +75,7 @@ body {
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
 }
 
 .menu-list.show-menu {
@@ -105,6 +108,17 @@ body {
 .bio-content {
   text-align: center;
   padding: 20px;
+  /* Анимация появления */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Класс для анимации при скролле */
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Стилизация фотографии профиля */
@@ -120,7 +134,7 @@ body {
 .link {
   color: #f0f0f0;
   text-decoration: underline;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .link:hover,
@@ -187,5 +201,13 @@ iframe {
   }
   iframe {
     height: 300px;
+  }
+}
+
+/* Отключение анимаций для пользователей, предпочитающих уменьшенное движение */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
